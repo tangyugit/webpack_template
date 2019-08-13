@@ -30,8 +30,9 @@ module.exports = merge(baseConfig, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"development"'
+            'process.env': { //定义开发环境变量
+                NODE_ENV: '"development"',
+                BASE_URL: '"http://192.168.xxx.xxx"'
             }
         }),
         new webpack.HotModuleReplacementPlugin(), //模块热更新
