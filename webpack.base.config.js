@@ -6,6 +6,11 @@ const webpack = require('webpack');
 
 /*
 **package.json使用cross-env跨平台设置NODE_ENV变量
+**babel-loader: 负责 es6 语法转化
+**babel-preset-env: 包含 es6、7 等版本的语法转化规则
+**babel-plugin-transform-runtime: 避免 polyfill 污染全局变量(转换插件)
+**babel-polyfill: es6 内置方法和函数转化垫片(项目主入口引入 -S)
+**babel-runtime: 是供编译模块复用工具函数(充满polyfill的包，-S)
 */
 
 function getEntries() { //获取所有入口文件
@@ -65,11 +70,31 @@ const config = {
                         ]
                     } }
                 ]
-            },
-            {
+            }, {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: { loader: "babel-loader" }
+            }, { //使用url-loader需配合使用file-loader，不然超过限制的图片会出现路径问题
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000, //10KB界限
+                    name: 'static/img/[name].[hash:7].[ext]'
+                }
+            }, {
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: 'static/media/[name].[hash:7].[ext]'
+                }
+            }, {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: 'static/fonts/[name].[hash:7].[ext]'
+                }
             }
         ]
     },

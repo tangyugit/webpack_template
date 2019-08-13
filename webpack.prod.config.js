@@ -7,7 +7,7 @@ module.exports = merge(baseConfig, {
     // devtool: 'source-map',
     devtool: 'none', //生产环境不使用源映射
     output: {
-        filename: 'js/[name].[chunkhash].js', //添加hash
+        filename: 'static/js/[name].[chunkhash].js', //添加hash
         publicPath: './', //CDN资源相对路径
     },
     plugins: [

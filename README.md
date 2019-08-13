@@ -1,8 +1,17 @@
-# webpack_template
-# webpack4的模板，可在普通项目中直接拿来使用
-# webpack4配置ES6环境
-# babel-loader: 负责 es6 语法转化
-# babel-preset-env: 包含 es6、7 等版本的语法转化规则
-# babel-plugin-transform-runtime: 避免 polyfill 污染全局变量(转换插件)
-# babel-polyfill: es6 内置方法和函数转化垫片(项目主入口引入 -S)
-# babel-runtime: 是供编译模块复用工具函数(充满polyfill的包，-S)
+# webpack4 + ES6/7 + jquery的多页面开发的模板
+
+简介：
+使用jquery开发页面，包括热更新等最新功能，可自行封装基于CMD规范的组件
+react、vue请使用官方脚手架
+
+使用方式：
+git clone或者直接下载项目， npm install安装所有依赖包
+
+项目目录：
+src：开发目录
+dist：打包目录（直接部署服务器即可）
+
+src/pages：新建页面请按照该目录下的结构来
+例如：新建页面pageA.html，pageA.js即为该页面的主入口文件，可从主入口文件直接引用类库或者插件，
+打包后分为两个js被引入页面，第三方库被打包为vendor.js，其余js则被混淆打包为pageA.js,可自行查看打包后的文件结构。
+图片的引用方式请看test.js
