@@ -56,21 +56,6 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                exclude: /(node_modules)/,
-                use: [
-                    { loader: 'style-loader' }, //css插入head
-                    { loader: 'css-loader' }, //加载css文件
-                    { loader: 'postcss-loader', options: { //配合autoprefixer插件使用
-                        sourceMap: true, //生成源映射
-                        plugins: [
-                            require('autoprefixer')({ //自动添加浏览器前缀（-webkit，-moz，-ms）
-                                browsers : ['last 100 versions'] //必须设置支持的浏览器才会自动添加添加浏览器兼容
-                            })
-                        ]
-                    } }
-                ]
-            }, {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: { loader: "babel-loader" }

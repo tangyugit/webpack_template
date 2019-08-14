@@ -5,10 +5,30 @@ const FriendErrors = require('friendly-errors-webpack-plugin');
 const Notifier = require('node-notifier'); //桌面右下角原生报错提示
 
 module.exports = merge(baseConfig, {
-    devtool: 'cheap-module-eval-source-map', //打开源映射，方便断点调试
+    devtool: 'cheap-module-eval-source-map', //开发环境打开源映射，方便断点调试
     output: {
         filename: 'js/[name].js',
         publicPath: '/', //CDN资源路径，开发路径所有资源都在根路径/下
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/, //开发环境使用style-css内嵌css
+                exclude: /(node_modules)/,
+                use: [
+                    { loader: 'style-loader' }, //css插入head
+                    { loader: 'css-loader' }, //加载css文件
+                    { loader: 'postcss-loader', options: { //配合autoprefixer插件使用
+                        sourceMap: true, //生成源映射
+                        plugins: [
+                            require('autoprefixer')({ //自动添加浏览器前缀（-webkit，-moz，-ms）
+                                browsers : ['last 100 versions'] //必须设置支持的浏览器才会自动添加添加浏览器兼容
+                            })
+                        ]
+                    } }
+                ]
+            }
+        ]
     },
     devServer: {
         clientLogLevel: 'warning', //当使用内联模式(inline mode)时，在开发工具(DevTools)的控制台(console)将显示消息，如：在重新加载之前，在一个错误之前，或者模块热替换(Hot Module Replacement)启用时
