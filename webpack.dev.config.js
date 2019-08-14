@@ -60,7 +60,10 @@ module.exports = merge(baseConfig, {
         new FriendErrors({ //识别某些类别的webpack错误，并清理，聚合和优先级，以提供更好的开发人员体验。
             clearConsole: true,
             compilationSuccessInfo: {
-                messages: ['Your application is running here: http://localhost:8600']
+                messages: [
+                    'Your server is running here: http://localhost:8600',
+                    'Your pages is running here: http://localhost:8600/xxx.html'
+                ]
             },
             onErrors: (severity, errors)=>{
                 if (severity !== 'error') return;
