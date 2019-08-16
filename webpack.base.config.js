@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob = require('glob'); //获取文件路径，配置多页面
 const merge = require('webpack-merge');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /*
 **package.json使用cross-env跨平台设置NODE_ENV变量
@@ -92,7 +93,14 @@ const config = {
     plugins: [
         new webpack.ProvidePlugin({
             '$': 'jquery'
-        })
+        }),
+        new CopyWebpackPlugin([ //设置不打包的目录，直接复制文件到指定目录下
+            {
+                from: path.resolve(__dirname, 'static'),
+                to: process.env.NODE_ENV == 'development' ? '/static' : path.resolve(__dirname, 'dist/static'),
+                ignore: ['.*']
+            }
+        ])
     ].concat(getAllOutPutFiles()), //追加htmlWebpackHtml实例数组
     optimization: { //代码分割插件
         splitChunks: {
