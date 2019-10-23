@@ -38,8 +38,8 @@ module.exports = merge(baseConfig, {
             warnings: true,
             errors: true
         },
-        open: true, //服务启动直接打开浏览器
-        host: 'localhost',
+        open: false, //服务启动直接打开浏览器
+        host: '0.0.0.0', //可局域网查看
         port: '8600',
         /*
         **此路径下的打包文件可在浏览器中访问。
