@@ -45,8 +45,8 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/runtime": "^7.6.3",
     "jquery": "^3.4.1"
   }
 }
